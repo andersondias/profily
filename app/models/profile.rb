@@ -18,7 +18,8 @@ class Profile < ApplicationRecord
   validates :headline, presence: true, length: { in: 2..200 }
   validates :country, presence: true, length: { in: 2..60 }
   validates :location, presence: true, length: { in: 2..100 }
-  validates :slug, presence: true, length: { in: 2..100 }, uniqueness: true
+  validates :slug, presence: true, length: { in: 2..100 }, uniqueness: true,
+    format: { with: /\A[a-zA-Z0-9\-]+\z/ }
 
   before_validation :generate_slug, on: :create
 

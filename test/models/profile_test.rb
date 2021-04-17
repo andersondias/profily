@@ -22,5 +22,15 @@ class ProfileTest < ActiveSupport::TestCase
     should validate_presence_of(:location)
     should validate_presence_of(:slug).on(:update)
     should validate_uniqueness_of(:slug).on(:update)
+
+    context 'slug update' do
+      subject { profiles(:one) }
+
+      should allow_value('anderson-another').for(:slug).on(:update)
+      should allow_value('anderson-another-123').for(:slug).on(:update)
+      should allow_value('anderson-123-other').for(:slug).on(:update)
+      should_not allow_value('anderson-#$').for(:slug).on(:update)
+      should_not allow_value('anderson dias').for(:slug).on(:update)
+    end
   end
 end

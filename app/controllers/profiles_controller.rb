@@ -37,7 +37,7 @@ class ProfilesController < ApplicationController
   # PATCH/PUT /profiles/1 or /profiles/1.json
   def update
     respond_to do |format|
-      if @profile.update(profile_params)
+      if @profile.update(edit_profile_params)
         format.html { redirect_to @profile, notice: "Profile was successfully updated." }
         format.json { render :show, status: :ok, location: @profile }
       else
@@ -65,5 +65,9 @@ class ProfilesController < ApplicationController
     # Only allow a list of trusted parameters through.
     def profile_params
       params.require(:profile).permit(:first_name, :last_name, :headline, :country, :location)
+    end
+
+    def edit_profile_params
+      params.require(:profile).permit(:first_name, :last_name, :headline, :country, :location, :slug)
     end
 end
