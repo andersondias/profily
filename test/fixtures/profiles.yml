@@ -1,0 +1,30 @@
+# == Schema Information
+#
+# Table name: profiles
+#
+#  id         :bigint           not null, primary key
+#  country    :string(60)       not null
+#  first_name :string(60)       not null
+#  headline   :string(200)      not null
+#  last_name  :string(60)       not null
+#  location   :string(100)      not null
+#  slug       :string(100)      not null
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#
+
+one:
+  first_name: Anderson
+  last_name: Dias
+  headline: MyString
+  country: MyString
+  location: MyString
+  slug: anderson-dias
+
+two:
+  first_name: Anderson
+  last_name: Days
+  headline: MyString
+  country: MyString
+  location: MyString
+  slug: anderson-days

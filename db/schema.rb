@@ -10,9 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 0) do
+ActiveRecord::Schema.define(version: 2021_04_17_165026) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "profiles", force: :cascade do |t|
+    t.string "first_name", limit: 60, null: false
+    t.string "last_name", limit: 60, null: false
+    t.string "headline", limit: 200, null: false
+    t.string "country", limit: 60, null: false
+    t.string "location", limit: 100, null: false
+    t.string "slug", limit: 100, null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
 
 end
