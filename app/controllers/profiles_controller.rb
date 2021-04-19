@@ -3,7 +3,7 @@ class ProfilesController < ApplicationController
 
   # GET /profiles or /profiles.json
   def index
-    @profiles = Profile.all
+    @profiles = Profile.order(created_at: :desc).all
   end
 
   # GET /profiles/1 or /profiles/1.json
@@ -37,7 +37,7 @@ class ProfilesController < ApplicationController
   # PATCH/PUT /profiles/1 or /profiles/1.json
   def update
     respond_to do |format|
-      if @profile.update(edit_profile_params)
+      if @profile.update(update_profile_params)
         format.html { redirect_to @profile, notice: "Profile was successfully updated." }
         format.json { render :show, status: :ok, location: @profile }
       else
@@ -59,7 +59,7 @@ class ProfilesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_profile
-      @profile = Profile.find_by slug: params[:slug]
+      @profile = Profile.find_by! slug: params[:id]
     end
 
     # Only allow a list of trusted parameters through.
@@ -67,7 +67,12 @@ class ProfilesController < ApplicationController
       params.require(:profile).permit(:first_name, :last_name, :headline, :country, :location)
     end
 
-    def edit_profile_params
-      params.require(:profile).permit(:first_name, :last_name, :headline, :country, :location, :slug)
+    def update_profile_params
+      update_params = params.require(:profile).permit(:first_name, :last_name, :headline, :country, :location, :slug)
+      if params[:commit] == 'draft'
+        { draft_attributes: update_params }
+      else
+        update_params
+      end
     end
 end

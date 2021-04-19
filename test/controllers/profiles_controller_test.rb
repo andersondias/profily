@@ -38,6 +38,19 @@ class ProfilesControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to profile_url(@profile)
   end
 
+  test "should update profile as draft" do
+    assert_difference('Profile.drafts.count') do
+      assert_no_difference('Profile.count') do
+        patch profile_url(@profile), params: { profile: { country: @profile.country, first_name: @profile.first_name, headline: @profile.headline, last_name: @profile.last_name, location: @profile.location }, commit: 'draft'}
+      end
+    end
+
+    assert_equal @profile, Profile.drafts.last.original_profile
+    assert_equal @profile, @profile.reload
+
+    assert_redirected_to profile_url(@profile)
+  end
+
   test "should destroy profile" do
     assert_difference('Profile.count', -1) do
       delete profile_url(@profile)

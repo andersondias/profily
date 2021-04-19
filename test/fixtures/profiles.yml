@@ -2,15 +2,24 @@
 #
 # Table name: profiles
 #
-#  id         :bigint           not null, primary key
-#  country    :string(60)       not null
-#  first_name :string(60)       not null
-#  headline   :string(200)      not null
-#  last_name  :string(60)       not null
-#  location   :string(100)      not null
-#  slug       :string(100)      not null
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
+#  id                  :bigint           not null, primary key
+#  country             :string(60)       not null
+#  first_name          :string(60)       not null
+#  headline            :string(200)      not null
+#  last_name           :string(60)       not null
+#  location            :string(100)      not null
+#  slug                :string(100)      not null
+#  created_at          :datetime         not null
+#  updated_at          :datetime         not null
+#  original_profile_id :bigint
+#
+# Indexes
+#
+#  index_profiles_on_original_profile_id  (original_profile_id)
+#
+# Foreign Keys
+#
+#  fk_rails_...  (original_profile_id => profiles.id)
 #
 
 one:
@@ -28,3 +37,12 @@ two:
   country: MyString
   location: MyString
   slug: anderson-days
+
+draft:
+  first_name: Anderson
+  last_name: Days
+  headline: A headline
+  country: Country
+  location: Location
+  slug: anderson-days
+  original_profile: two

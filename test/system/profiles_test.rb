@@ -40,6 +40,21 @@ class ProfilesTest < ApplicationSystemTestCase
     click_on "Back"
   end
 
+  test "saving a draft version of Profile" do
+    visit profiles_url
+    click_on "Edit", match: :first
+
+    fill_in "Country", with: 'New Country'
+    fill_in "First name", with: 'First'
+    fill_in "Headline", with: 'New headline'
+    fill_in "Last name", with: 'Last'
+    fill_in "Location", with: 'New city'
+    click_on "Save Draft"
+
+    assert_text "There is a draft version available in edit mode"
+    click_on "Back"
+  end
+
   test "destroying a Profile" do
     visit profiles_url
     page.accept_confirm do

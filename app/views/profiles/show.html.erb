@@ -1,4 +1,7 @@
 <p id="notice"><%= notice %></p>
+<% if @profile.draft.present? %>
+<p><i>There is a draft version available in edit mode</i></p>
+<% end %>
 
 <p>
   <strong>First name:</strong>

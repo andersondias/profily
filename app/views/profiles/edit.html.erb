@@ -1,4 +1,7 @@
 <h1>Editing Profile</h1>
+<% if @profile.draft.present? %>
+<p><i>This is a draft version available in edit mode</i></p>
+<% end %>
 
 <%= render 'form', profile: @profile %>
 

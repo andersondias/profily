@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_17_165026) do
+ActiveRecord::Schema.define(version: 2021_04_17_181414) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -24,6 +24,9 @@ ActiveRecord::Schema.define(version: 2021_04_17_165026) do
     t.string "slug", limit: 100, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "original_profile_id"
+    t.index ["original_profile_id"], name: "index_profiles_on_original_profile_id"
   end
 
+  add_foreign_key "profiles", "profiles", column: "original_profile_id"
 end
