@@ -23,7 +23,6 @@
 #
 class Profile < ApplicationRecord
   default_scope { where(original_profile_id: nil) }
-  scope :with_drafts, -> { unscoped }
   scope :drafts, -> { unscoped.where.not(original_profile_id: nil) }
 
   validates :first_name, presence: true, length: { in: 2..60 }
